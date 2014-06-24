@@ -189,6 +189,7 @@ def getCppFunctionName(api, argumentObjectString):
                 cppFunctionName = cppFunctionName + 'RGB'
             else:
                 cppFunctionName = cppFunctionName + string.title()
+    cppFunctionName =  cppFunctionName.replace('\n','')
     global cToCppClassObjectList   
     cToCppClassObjectList.append(FunctionClassObject(fullCFunctionName, cToCppName(argumentObjectString), cppFunctionName))
     return cppFunctionName
@@ -591,7 +592,7 @@ def getMethodLineCommentsToCppTuple(hppHeaderContent, classCommentMap, sortedMap
                 if True == ('inline' in line) and False == ('(' in line):
                     line = line + hppHeaderContent[lineNumber+1]
                 if (True == ('(' in line)) and (True == (' ' in line)):
-                    if False == (':' in line) and ((True == ('inline' in line) and False == ('==' in line)) or 
+                    if (True == ('::' in line) or False == (':' in line)) and ((True == ('inline' in line) and False == ('==' in line)) or 
                         ((False == ('return' in line) and (False == ('=' in line))))):
                         functionName = (re.findall('[\s]([^$]*)\(', line))
                        # print functionName
@@ -666,8 +667,9 @@ def createEnumLineCommentsBlock(cEnumName, enumLineNumber, enumIndent, hppHeader
                     if (mineCommentToAdd[len(mineCommentToAdd)-1]!='\n'):
                         mineCommentToAdd = mineCommentToAdd + '\n'
                     enumLineCommentsBlocks.append(commentToAdd(lineNumber+1, mineCommentToAdd))
-                    global cToCppClassObjectList
-                    cToCppClassObjectList.append(FunctionClassObject(enumerator, currentClassName, cpp_enumerator))             
+            cpp_enumerator =  cpp_enumerator.replace('\n','')
+            global cToCppClassObjectList
+            cToCppClassObjectList.append(FunctionClassObject(enumerator, currentClassName, cpp_enumerator))             
             if len(mineCommentToAdd) == 0:
                 global enumeratorNotFoundList
                 enumeratorNotFoundList.append(enumerator)
@@ -708,6 +710,7 @@ def getEnumLineCommentsToCppTuple(hppHeaderContent, sortedEnumMap):
                         cEnumName = cEnumName.replace(" ", "")
                         enumLineNumber = lineNumber
                         enumIndent = re.findall('\s+', line)
+                        enumName =  enumName.replace('\n','')
                         global cToCppClassObjectList
                         cToCppClassObjectList.append(FunctionClassObject(cEnumName, currentClassName, enumName))
                         if (len(enumIndent) > 0):

@@ -4,6 +4,7 @@ LibzZincDoxygen
 Use this script provide to generate C++ header with commets and doxygen page.
 
 Instructions:
+
 1. Copy api_2_api++_doc.py and libzinc_doxgen_script folder into your libZinc directory.
 
 2. Run the following command "python api_2_api++_doc.py"
