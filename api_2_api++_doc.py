@@ -698,12 +698,17 @@ def getEnumLineCommentsToCppTuple(hppHeaderContent, sortedEnumMap):
                     if len(enumName) > 0:
                         enumName = enumName[0]
                         cEnumName = currentClassName+enumName
+                        print cEnumName
                         charPos = 0
                         while charPos < len(cEnumName):
                             currentChar = cEnumName[charPos]
                             if (currentChar.isupper()):
-                                newchar = currentChar.lower()
-                                cEnumName = cEnumName[0:charPos] + "_" + newchar+ cEnumName[charPos+1:]
+                                if currentChar == "I" and cEnumName[charPos+1] == "O":
+                                    cEnumName = cEnumName[0:charPos] + "_" + "io" + cEnumName[charPos+2:]
+                                    charPos = charPos + 1
+                                else:
+                                    newchar = currentChar.lower()
+                                    cEnumName = cEnumName[0:charPos] + "_" + newchar+ cEnumName[charPos+1:]
                             charPos = charPos + 1
                         cEnumName = "cmzn" + cEnumName
                         cEnumName = cEnumName.replace("\n", "")
