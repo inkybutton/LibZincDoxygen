@@ -1,3 +1,4 @@
 [submodule "zinc"]
 	path = zinc
 	url = https://github.com/OpenCMISS/zinc
+	branch = devel
