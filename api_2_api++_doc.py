@@ -15,7 +15,7 @@ def getFilename():
     hFilenames = []
     hppFilenames = []
     typesFilenames = []
-    for dirname, dirnames, filenames in os.walk('./core/source/api/zinc'):
+    for dirname, dirnames, filenames in os.walk('./core/source/api/opencmiss/zinc'):
         if '.svn' in dirnames:
             # don't go into any .git directories.
             dirnames.remove('.svn')
@@ -850,8 +850,8 @@ def main():
     hFilenames, hppFilenames, typesFilenames = getFilename()
   #  summary(hFilenames, hppFilenames, typesFilenames)
     file_pairs = match_pair(hFilenames, hppFilenames, typesFilenames)
-    hppFilenames.append(['./core/source/api/zinc/types', 'scenecoordinatesystem.hpp'])
-    typesFilenames.append(['./core/source/api/zinc', 'status.h'])
+    hppFilenames.append(['./core/source/api/opencmiss/zinc/types', 'scenecoordinatesystem.hpp'])
+    typesFilenames.append(['./core/source/api/opencmiss/zinc', 'status.h'])
   #  for pair in pair_list:
   #      print pair;
     try:
